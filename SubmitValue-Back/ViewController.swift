@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         }
         
         if let interval = paramIntervar {
-            resultInterval.text = "\(Int(intervar))분 마다"
+            resultInterval.text = "\(Int(interval))분 마다"
         }
     }
 
