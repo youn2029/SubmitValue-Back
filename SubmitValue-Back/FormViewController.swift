@@ -35,17 +35,29 @@ class FormViewController: UIViewController {
     // submit 버튼
     @IBAction func onSubmit(_ sender: Any) {
         
-        // 이전 화면을 presentingViewController 속성으로 읽어온 다음
-        // viewController 타입으로 캐스팅한다.
-        guard let preVC = self.presentingViewController as? ViewController else {
-            return
-        }
+        /* 직접 값을 전달(동기) */
+//        // 이전 화면을 presentingViewController 속성으로 읽어온 다음
+//        // viewController 타입으로 캐스팅한다.
+//        guard let preVC = self.presentingViewController as? ViewController else {
+//            return
+//        }
+//
+//        // 값을 전달한다
+//        preVC.paramEamil = email.text!
+//        preVC.paramUpdate = isUpdate.isOn
+//        preVC.paramIntervar = interval.value
         
-        // 값을 전달한다
-        preVC.paramEamil = email.text!
-        preVC.paramUpdate = isUpdate.isOn
-        preVC.paramIntervar = interval.value
         
+        /* AppDelegate 객체를 이용하여 값 전달(비동기)-앱이 종료되면 삭제됨 */
+        // AppDelegate 객체의 인스턴스를 가져온다
+        let ad = UIApplication.shared.delegate as? AppDelegate
+
+        // 값 저장
+        ad?.paramEmail = email.text!
+        ad?.paramUpdate = isUpdate.isOn
+        ad?.paramInterval = interval.value
+
+
         // 이전화면으로
         self.presentingViewController?.dismiss(animated: true)
         
