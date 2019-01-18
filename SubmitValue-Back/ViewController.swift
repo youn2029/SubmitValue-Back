@@ -41,22 +41,41 @@ class ViewController: UIViewController {
 //            resultInterval.text = "\(Int(interval))분 마다"
 //        }
         
+        
         /* AppDelegate를 이용하여 값 전달(비동기) */
+//        // AppDelegate의 객체 가져오기
+//        let ad = UIApplication.shared.delegate as? AppDelegate
+//
+//        if let email = ad?.paramEmail {     // nil check
+//            resultEmail.text = email
+//        }
+//
+//        if let update = ad?.paramUpdate {
+//            resultUpdate.text = update == true ? "자동갱신" : "자동갱신안함"
+//        }
+//
+//        if let interval = ad?.paramInterval {
+//            resultInterval.text = "\(Int(interval))분 마다"
+//        }
         
-        // AppDelegate의 객체 가져오기
-        let ad = UIApplication.shared.delegate as? AppDelegate
         
-        if let email = ad?.paramEmail {     // nil check
+        /* UserDefaults를 이용하여 값 전달(비동기) */
+        // UserDefaults의 객체 가져오기
+        let ud = UserDefaults.standard
+        
+        if let email = ud.string(forKey: "email") {     // String타입만 옵셔널타입
             resultEmail.text = email
         }
+
+        let update = ud.bool(forKey: "isUpdate")
+        resultUpdate.text = update == true ? "자동갱신" : "자동갱신안함"
         
-        if let update = ad?.paramUpdate {
-            resultUpdate.text = update == true ? "자동갱신" : "자동갱신안함"
-        }
+
+        let interval = ud.double(forKey: "interval")
+        resultInterval.text = "\(Int(interval))분 마다"
         
-        if let interval = ad?.paramInterval {
-            resultInterval.text = "\(Int(interval))분 마다"
-        }
+        
+        
 
         
     }

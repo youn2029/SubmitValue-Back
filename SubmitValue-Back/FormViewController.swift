@@ -48,17 +48,26 @@ class FormViewController: UIViewController {
 //        preVC.paramIntervar = interval.value
         
         
-        /* AppDelegate 객체를 이용하여 값 전달(비동기)-앱이 종료되면 삭제됨 */
+        /* AppDelegate 객체를 이용하여 값 전달(비동기) - 앱이 종료되면 정보삭제됨 */
         // AppDelegate 객체의 인스턴스를 가져온다
-        let ad = UIApplication.shared.delegate as? AppDelegate
-
+//        let ad = UIApplication.shared.delegate as? AppDelegate
+//
+//        // 값 저장
+//        ad?.paramEmail = email.text!
+//        ad?.paramUpdate = isUpdate.isOn
+//        ad?.paramInterval = interval.value
+        
+        
+        /* UserDefaults객체를 이용하여 값 전달(비동기) - 앱이 삭제되면 정보삭제됨(반영구적) */
+        // UserDefaults 객체의 인스턴스 가져오기
+        let ud = UserDefaults.standard
+        
         // 값 저장
-        ad?.paramEmail = email.text!
-        ad?.paramUpdate = isUpdate.isOn
-        ad?.paramInterval = interval.value
-
-
-        // 이전화면으로
+        ud.set(self.email.text, forKey: "email")
+        ud.set(self.isUpdate.isOn, forKey: "isUpdate")
+        ud.set(self.interval.value, forKey: "interval")
+        
+        // 이전 화면으로
         self.presentingViewController?.dismiss(animated: true)
         
     }
